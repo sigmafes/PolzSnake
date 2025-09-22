@@ -1,4 +1,4 @@
-const CACHE_NAME = 'polzsnake-cache-v1';
+const CACHE_NAME = 'PolzSnake-v1.2.6';
 const urlsToCache = [
     '/',
     'index.html',
@@ -8,8 +8,6 @@ const urlsToCache = [
     'mapEngine.js',
     'mapPlayer.js',
     'styles.css',
-    // Asegúrate de incluir todos los archivos de tu juego aquí
-    // Incluye los iconos también
     'icons/icon-192.png',
     'icons/icon-512.png'
 ];
