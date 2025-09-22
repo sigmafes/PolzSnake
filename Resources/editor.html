@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PolzSnake! - Map Editor</title>
+    <style>
+        body {
+            background-color: #333;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            flex-direction: column;
+            font-family: sans-serif;
+        }
+        canvas {
+            background-color: #111;
+            border: 2px solid #555;
+            /* Se ajusta el tamaño del canvas del editor y jugador para que sea el mismo */
+            width: 400px;
+            height: 400px;
+        }
+        .screen {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            width: 100%;
+            height: 100%;
+            justify-content: center;
+        }
+        #map-menu-screen, #map-editor-screen, #player-game-screen {
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+        }
+        .map-list-container {
+            border: 2px solid #555;
+            padding: 10px;
+            max-height: 400px;
+            overflow-y: scroll;
+            width: 300px;
+            margin: 20px 0;
+        }
+        .map-entry {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 5px;
+            border-bottom: 1px solid #444;
+            cursor: pointer;
+        }
+        .map-entry:hover {
+            background-color: #444;
+        }
+        .map-actions {
+            display: flex;
+            gap: 10px;
+        }
+        #map-editor-ui {
+            display: flex;
+            flex-direction: row;
+            gap: 50px;
+        }
+        .editor-tools {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .editor-tool-button {
+            padding: 10px;
+        }
+        .editor-block-selector {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            align-items: center;
+        }
+        .block-preview {
+            width: 50px;
+            height: 50px;
+            border: 2px solid #555;
+            cursor: pointer;
+        }
+        /* Estilos de la UI del juego */
+        .ui-container {
+            display: flex;
+            justify-content: space-around;
+            width: 400px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="map-menu-screen" class="screen">
+        <h2>Created Maps</h2>
+        <div class="map-list-container" id="map-list-container">
+        </div>
+        <div class="map-actions">
+            <button id="play-map-button" disabled>Play Map</button>
+            <button id="edit-map-button" disabled>Edit</button> <button id="rename-map-button" disabled>Rename</button>
+            <button id="delete-map-button" disabled>Delete</button>
+            <button id="copy-map-button" disabled>Copy</button>
+        </div>
+        <button id="new-map-button">Create New Map</button>
+        <button id="map-menu-return-button">Back</button>
+    </div>
+
+    <div id="map-editor-screen" class="screen">
+        <div id="map-editor-ui">
+            <div class="editor-tools">
+                <h3>Tools</h3>
+                <div class="editor-block-selector">
+                    <div class="block-preview" data-block-type="obstacle"></div>
+                    <div class="block-preview" data-block-type="spawn"></div>
+                </div>
+            </div>
+            <div class="editor-main-area">
+                <canvas id="mapEditorCanvas" width="400" height="400"></canvas>
+            </div>
+            <div class="editor-tools">
+                <h3>Actions</h3>
+                <button id="undo-button" class="editor-tool-button">Undo</button>
+                <button id="redo-button" class="editor-tool-button">Redo</button>
+                <button id="save-map-button" class="editor-tool-button">Save</button>
+                <button id="exit-editor-button" class="editor-tool-button">Exit</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="player-game-screen" class="screen">
+        <div class="ui-container">
+            <p class="score-display">Score: <span id="player-puntaje">0</span></p>
+            <p class="score-display">Highscore: <span id="player-highscore">0</span></p>
+            <p class="coins-display">Coins: <span id="player-coins">0</span></p>
+        </div>
+        <canvas id="playerCanvas" width="400" height="400"></canvas>
+        <button id="return-from-game">Back</button>
+    </div>
+    
+    <script>
+        function showScreen(screen) {
+            document.querySelectorAll('.screen').forEach(s => s.style.display = 'none');
+            screen.style.display = 'flex';
+        }
+    </script>
+    <script src="mapEngine.js"></script>
+    <script src="mapPlayer.js"></script>
+</body>
+</html>
