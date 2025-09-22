@@ -25,6 +25,52 @@ let highscore = localStorage.getItem('snakeHighscore') || 0;
 let isSpeedBoosted = false;
 let dx, dy;
 
+const isAndroid = navigator.userAgent.toLowerCase().includes('android');
+
+function setupControls() {
+    if (isAndroid) {
+        const upButton = document.getElementById('up-button');
+        const downButton = document.getElementById('down-button');
+        const leftButton = document.getElementById('left-button');
+        const rightButton = document.getElementById('right-button');
+
+        upButton.addEventListener('click', () => {
+            if (direction !== 'down') { direction = 'up'; dx = 0; dy = -gridSize; }
+        });
+        downButton.addEventListener('click', () => {
+            if (direction !== 'up') { direction = 'down'; dx = 0; dy = gridSize; }
+        });
+        leftButton.addEventListener('click', () => {
+            if (direction !== 'right') { direction = 'left'; dx = -gridSize; dy = 0; }
+        });
+        rightButton.addEventListener('click', () => {
+            if (direction !== 'left') { direction = 'right'; dx = gridSize; dy = 0; }
+        });
+    } else {
+        document.addEventListener('keydown', e => {
+            switch (e.key) {
+                case 'ArrowUp':
+                case 'w':
+                    if (direction !== 'down') { direction = 'up'; dx = 0; dy = -gridSize; } break;
+                case 'ArrowDown':
+                case 's':
+                    if (direction !== 'up') { direction = 'down'; dx = 0; dy = gridSize; } break;
+                case 'ArrowLeft':
+                case 'a':
+                    if (direction !== 'right') { direction = 'left'; dx = -gridSize; dy = 0; } break;
+                case 'ArrowRight':
+                case 'd':
+                    if (direction !== 'left') { direction = 'right'; dx = gridSize; dy = 0; } break;
+                case ' ':
+                    isPaused = !isPaused;
+                    break;
+            }
+        });
+    }
+}
+
+window.addEventListener('load', setupControls);
+
 const skinsData = [
     { name: 'Default', price: 0, color: 'lime', id: 'default', type: 'single-color' },
     { name: 'Pastel', price: 1000, color: ['#a9d6e5', '#f1faee'], id: 'skin-1', type: 'two-color' },
@@ -455,4 +501,3 @@ function checkOrientation() {
 }
 
 window.addEventListener('load', setupControls);
-
