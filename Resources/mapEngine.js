@@ -438,10 +438,11 @@ let isDragging = false;
 let startX, startY;
 
 editorCanvas.addEventListener('touchstart', (e) => {
+    e.preventDefault();
     isDragging = true;
     startX = e.touches[0].clientX;
     startY = e.touches[0].clientY;
-});
+}, { passive: false });
 
 editorCanvas.addEventListener('touchmove', (e) => {
     if (!isDragging) return;
@@ -460,7 +461,7 @@ editorCanvas.addEventListener('touchmove', (e) => {
     startY = currentY;
 
     drawMap();
-});
+}, { passive: false });
 
 editorCanvas.addEventListener('touchend', () => {
     isDragging = false;

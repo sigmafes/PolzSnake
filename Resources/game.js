@@ -429,4 +429,4 @@ canvas.addEventListener('touchend', (e) => {
             direction = 'up';
         }
     }
-}, false);
+}, { passive: false });

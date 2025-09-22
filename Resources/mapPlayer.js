@@ -333,7 +333,7 @@ playerCanvas.addEventListener('touchstart', (e) => {
     e.preventDefault();
     touchStartX = e.touches[0].clientX;
     touchStartY = e.touches[0].clientY;
-}, false);
+}, { passive: false });
 
 playerCanvas.addEventListener('touchend', (e) => {
     e.preventDefault();
@@ -346,22 +346,14 @@ playerCanvas.addEventListener('touchend', (e) => {
     if (Math.abs(dx) > Math.abs(dy)) {
         if (dx > 0 && direction !== 'left') {
             direction = 'right';
-            dx = GRID_SIZE;
-            dy = 0;
         } else if (dx < 0 && direction !== 'right') {
             direction = 'left';
-            dx = -GRID_SIZE;
-            dy = 0;
         }
     } else {
         if (dy > 0 && direction !== 'up') {
             direction = 'down';
-            dx = 0;
-            dy = GRID_SIZE;
         } else if (dy < 0 && direction !== 'down') {
             direction = 'up';
-            dx = 0;
-            dy = -GRID_SIZE;
         }
     }
-}, false);
+}, { passive: false });
