@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="stylesheet" href="styles.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PolzSnake! v1.2.1</title>
+    <title>PolzSnake! v1.2.6</title>
     <style>
         body {
             background-color: #333;
@@ -125,6 +126,20 @@
 </head>
 <body>
 
+    <div id="orientation-lock" class="screen">
+    <p>¡Por favor, gira tu dispositivo para jugar!</p>
+    <p>(Modo horizontal)</p>
+</div>
+
+    <div id="touch-controls">
+    <button id="up-button" class="dpad-button">▲</button>
+    <div class="horizontal-buttons">
+        <button id="left-button" class="dpad-button">◄</button>
+        <button id="right-button" class="dpad-button">►</button>
+    </div>
+    <button id="down-button" class="dpad-button">▼</button>
+</div>
+
     <div id="main-menu" class="screen">
         <div class="main-menu-content">
             <div class="skin-selector-container">
@@ -156,7 +171,7 @@
     </div>
     
     <div id="version-info">
-        v1.2.1 - by sigmafes!
+        v1.2.6 - by sigmafes!
     </div>
     
     <script src="game.js"></script>
