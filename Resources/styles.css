@@ -1,0 +1,33 @@
+#touch-controls {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+.horizontal-buttons {
+    display: flex;
+    gap: 5px;
+}
+
+.dpad-button {
+    width: 60px;
+    height: 60px;
+    font-size: 2em;
+    background-color: rgba(52, 152, 219, 0.7); /* Azul transparente */
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+@media (max-width: 767px) {
+    #touch-controls {
+        display: flex;
+    }
+}
