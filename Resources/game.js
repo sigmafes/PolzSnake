@@ -25,21 +25,6 @@ let highscore = localStorage.getItem('snakeHighscore') || 0;
 let isSpeedBoosted = false;
 let dx, dy;
 
-const isAndroid = navigator.userAgent.toLowerCase().includes('android');
-
-function checkOrientation() {
-    if (isAndroid) {
-        if (window.innerHeight > window.innerWidth) {
-            alert('¡Por favor, gira tu dispositivo en modo horizontal!');
-        } else {
-        }
-    }
-}
-
-checkOrientation();
-
-window.addEventListener('resize', checkOrientation);
-
 const skinsData = [
     { name: 'Default', price: 0, color: 'lime', id: 'default', type: 'single-color' },
     { name: 'Pastel', price: 1000, color: ['#a9d6e5', '#f1faee'], id: 'skin-1', type: 'two-color' },
@@ -470,3 +455,4 @@ function checkOrientation() {
 }
 
 window.addEventListener('load', setupControls);
+
