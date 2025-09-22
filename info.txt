@@ -1,0 +1,10 @@
+If you have any questions before opening the .bat file
+Feel free to go to the resources folder to check that it's not a malicious game.
+
+The game uses JavaScript and runs in your default browser because it's an HTML file.
+
+The .bat file is for aesthetic purposes only and won't cause any harm to your device.
+
+You're also free to use any virus detection software.
+
+Finally, thank you so much for downloading/playing my game <3
