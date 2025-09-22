@@ -1,4 +1,3 @@
-// --- Elementos del DOM para la pantalla de juego ---
 const playerGameScreen = document.getElementById('player-game-screen');
 const playerCanvas = document.getElementById('playerCanvas');
 const playerCtx = playerCanvas.getContext('2d');
@@ -325,3 +324,35 @@ if (returnFromGameButton) {
         showScreen(document.getElementById('map-menu-screen'));
     });
 }
+
+let touchStartX = 0;
+let touchStartY = 0;
+
+playerCanvas.addEventListener('touchstart', (e) => {
+    e.preventDefault();
+    touchStartX = e.touches[0].clientX;
+    touchStartY = e.touches[0].clientY;
+}, { passive: false });
+
+playerCanvas.addEventListener('touchend', (e) => {
+    e.preventDefault();
+    const touchEndX = e.changedTouches[0].clientX;
+    const touchEndY = e.changedTouches[0].clientY;
+    
+    const dx = touchEndX - touchStartX;
+    const dy = touchEndY - touchStartY;
+
+    if (Math.abs(dx) > Math.abs(dy)) {
+        if (dx > 0 && direction !== 'left') {
+            direction = 'right';
+        } else if (dx < 0 && direction !== 'right') {
+            direction = 'left';
+        }
+    } else {
+        if (dy > 0 && direction !== 'up') {
+            direction = 'down';
+        } else if (dy < 0 && direction !== 'down') {
+            direction = 'up';
+        }
+    }
+}, { passive: false });
