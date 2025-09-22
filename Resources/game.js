@@ -12,6 +12,7 @@ const returnButton = document.getElementById('return-button');
 const skinSelectorContainer = document.getElementById('skin-selector');
 const storeCoinsElement = document.getElementById('store-coins');
 const shopSkinsContainer = document.getElementById('shop-skins-container');
+const orientationLockScreen = document.getElementById('orientation-lock');
 
 const gridSize = 20;
 const worldWidth = 1600;
@@ -414,34 +415,58 @@ returnButton.addEventListener('click', () => showScreen(mainScreen));
 renderSkinsSelector();
 showScreen(mainScreen);
 
-let touchStartX = 0;
-let touchStartY = 0;
+function setupControls() {
+    if (isAndroid) {
+        const upButton = document.getElementById('up-button');
+        const downButton = document.getElementById('down-button');
+        const leftButton = document.getElementById('left-button');
+        const rightButton = document.getElementById('right-button');
 
-canvas.addEventListener('touchstart', (e) => {
-    e.preventDefault();
-    touchStartX = e.touches[0].clientX;
-    touchStartY = e.touches[0].clientY;
-}, false);
-
-canvas.addEventListener('touchend', (e) => {
-    e.preventDefault();
-    const touchEndX = e.changedTouches[0].clientX;
-    const touchEndY = e.changedTouches[0].clientY;
-    
-    const dx = touchEndX - touchStartX;
-    const dy = touchEndY - touchStartY;
-    
-    if (Math.abs(dx) > Math.abs(dy)) {
-        if (dx > 0 && direction !== 'left') {
-            direction = 'right';
-        } else if (dx < 0 && direction !== 'right') {
-            direction = 'left';
-        }
+        upButton.addEventListener('click', () => {
+            if (direction !== 'down') { direction = 'up'; dx = 0; dy = -gridSize; }
+        });
+        downButton.addEventListener('click', () => {
+            if (direction !== 'up') { direction = 'down'; dx = 0; dy = gridSize; }
+        });
+        leftButton.addEventListener('click', () => {
+            if (direction !== 'right') { direction = 'left'; dx = -gridSize; dy = 0; }
+        });
+        rightButton.addEventListener('click', () => {
+            if (direction !== 'left') { direction = 'right'; dx = gridSize; dy = 0; }
+        });
     } else {
-        if (dy > 0 && direction !== 'up') {
-            direction = 'down';
-        } else if (dy < 0 && direction !== 'down') {
-            direction = 'up';
+        document.addEventListener('keydown', e => {
+            switch (e.key) {
+                case 'ArrowUp':
+                case 'w':
+                    if (direction !== 'down') { direction = 'up'; dx = 0; dy = -gridSize; } break;
+                case 'ArrowDown':
+                case 's':
+                    if (direction !== 'up') { direction = 'down'; dx = 0; dy = gridSize; } break;
+                case 'ArrowLeft':
+                case 'a':
+                    if (direction !== 'right') { direction = 'left'; dx = -gridSize; dy = 0; } break;
+                case 'ArrowRight':
+                case 'd':
+                    if (direction !== 'left') { direction = 'right'; dx = gridSize; dy = 0; } break;
+                case ' ':
+                    isPaused = !isPaused;
+                    break;
+            }
+        });
+    }
+}
+
+function checkOrientation() {
+    if (isAndroid) {
+        if (window.innerHeight > window.innerWidth) {
+            orientationLockScreen.style.display = 'flex';
+            document.getElementById('game-screen').style.display = 'none';
+        } else {
+            orientationLockScreen.style.display = 'none';
+            showScreen(mainScreen);
         }
     }
-}, { passive: false });
+}
+
+window.addEventListener('load', setupControls);

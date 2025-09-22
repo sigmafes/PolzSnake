@@ -2,10 +2,10 @@
     position: absolute;
     bottom: 20px;
     right: 20px;
-    display: flex;
     flex-direction: column;
     align-items: center;
     gap: 5px;
+    display: none;
 }
 
 .horizontal-buttons {
@@ -17,7 +17,7 @@
     width: 60px;
     height: 60px;
     font-size: 2em;
-    background-color: rgba(52, 152, 219, 0.7); /* Azul transparente */
+    background-color: rgba(52, 152, 219, 0.7);
     color: white;
     border: none;
     border-radius: 10px;
@@ -30,4 +30,45 @@
     #touch-controls {
         display: flex;
     }
+}
+
+#orientation-lock {
+    background-color: black;
+    color: white;
+    font-size: 1.5em;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+}
+
+body {
+    background-color: #333;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    flex-direction: column;
+    font-family: sans-serif;
+}
+canvas {
+    background-color: #111;
+    border: 2px solid #555;
+}
+.screen {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
 }
