@@ -397,7 +397,8 @@ function mainLoop() {
     } else {
         snake.pop();
     }
-    if (checkCollision()) {
+ if (checkCollision()) {
+        localStorage.setItem('playerCoins', playerCoins); 
         alert('Game Over! Your score is: ' + score);
         clearInterval(gameInterval);
         showScreen(mainScreen);
@@ -441,3 +442,4 @@ function checkOrientation() {
 }
 
 window.addEventListener('load', setupControls);
+
