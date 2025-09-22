@@ -23,41 +23,30 @@
     -webkit-tap-highlight-color: transparent;
 }
 
-#dpad .up-button { top: 10px; left: 50%; transform: translateX(-50%); }
-#dpad .down-button { bottom: 10px; left: 50%; transform: translateX(-50%); }
-#dpad .left-button { left: 10px; top: 50%; transform: translateY(-50%); }
-#dpad .right-button { right: 10px; top: 50%; transform: translateY(-50%); }
+#dpad .up-button { 
+    top: 0; 
+    left: 50%; 
+    transform: translateX(-50%); 
+}
+#dpad .down-button { 
+    bottom: 0; 
+    left: 50%; 
+    transform: translateX(-50%); 
+}
+#dpad .left-button { 
+    left: 0; 
+    top: 50%; 
+    transform: translateY(-50%); 
+}
+#dpad .right-button { 
+    right: 0; 
+    top: 50%; 
+    transform: translateY(-50%); 
+}
 
 @media (max-width: 767px) {
     #dpad {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-}
-
-@media (max-width: 767px) {
-    #left-controls, #right-controls {
-        display: flex;
-    }
-}
-
-.dpad-button {
-    width: 60px;
-    height: 60px;
-    font-size: 2em;
-    background-color: rgba(52, 152, 219, 0.7);
-    color: white;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    user-select: none;
-    -webkit-tap-highlight-color: transparent;
-}
-
-@media (max-width: 767px) {
-    #touch-controls {
-        display: flex;
+        display: block;
     }
 }
 
