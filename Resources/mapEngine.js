@@ -433,3 +433,36 @@ if (editMapButton) editMapButton.addEventListener('click', editSelectedMap);
 if (renameMapButton) renameMapButton.addEventListener('click', renameSelectedMap);
 if (deleteMapButton) deleteMapButton.addEventListener('click', deleteSelectedMap);
 if (copyMapButton) copyMapButton.addEventListener('click', copySelectedMap);
+
+let isDragging = false;
+let startX, startY;
+
+editorCanvas.addEventListener('touchstart', (e) => {
+    e.preventDefault();
+    isDragging = true;
+    startX = e.touches[0].clientX;
+    startY = e.touches[0].clientY;
+}, { passive: false });
+
+editorCanvas.addEventListener('touchmove', (e) => {
+    if (!isDragging) return;
+    e.preventDefault();
+
+    const currentX = e.touches[0].clientX;
+    const currentY = e.touches[0].clientY;
+
+    const dx = currentX - startX;
+    const dy = currentY - startY;
+
+    camX -= dx;
+    camY -= dy;
+
+    startX = currentX;
+    startY = currentY;
+
+    drawMap();
+}, { passive: false });
+
+editorCanvas.addEventListener('touchend', () => {
+    isDragging = false;
+});
